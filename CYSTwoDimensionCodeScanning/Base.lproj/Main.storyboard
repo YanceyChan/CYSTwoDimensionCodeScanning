@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,8 +16,56 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-fY-qSh">
+                                <rect key="frame" x="0.0" y="28" width="600" height="400"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scanning for QR Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGb-sR-etA">
+                                        <rect key="frame" x="8" y="171" width="584" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="dYZ-ez-m27"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="eGb-sR-etA" firstAttribute="top" secondItem="ecP-fY-qSh" secondAttribute="top" constant="171" id="6Ho-59-Hvx"/>
+                                    <constraint firstItem="eGb-sR-etA" firstAttribute="leading" secondItem="ecP-fY-qSh" secondAttribute="leading" constant="8" id="9Dy-DX-Uuo"/>
+                                    <constraint firstAttribute="trailing" secondItem="eGb-sR-etA" secondAttribute="trailing" constant="8" id="aAG-xL-W2u"/>
+                                    <constraint firstAttribute="height" constant="400" id="hqM-px-OoT"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx2-1A-v3C">
+                                <rect key="frame" x="214" y="444" width="173" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="173" id="hyK-W2-RrN"/>
+                                    <constraint firstAttribute="height" constant="30" id="tyo-1z-dl0"/>
+                                </constraints>
+                                <state key="normal" title="star">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapMyButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KFv-Vn-C4Z"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ecP-fY-qSh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="D9w-v6-yvl"/>
+                            <constraint firstItem="zx2-1A-v3C" firstAttribute="centerX" secondItem="ecP-fY-qSh" secondAttribute="centerX" constant="0.5" id="ENW-Qi-F06"/>
+                            <constraint firstItem="zx2-1A-v3C" firstAttribute="top" secondItem="ecP-fY-qSh" secondAttribute="bottom" constant="16" id="Ex1-XS-Xa7"/>
+                            <constraint firstItem="ecP-fY-qSh" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="FLh-Lp-d3V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ecP-fY-qSh" secondAttribute="trailing" constant="-16" id="GtZ-Sx-VIX"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myButton" destination="zx2-1A-v3C" id="tCv-e8-F2V"/>
+                        <outlet property="myLabel" destination="eGb-sR-etA" id="0cl-hK-OVw"/>
+                        <outlet property="myVIew" destination="ecP-fY-qSh" id="o1j-cQ-lea"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
