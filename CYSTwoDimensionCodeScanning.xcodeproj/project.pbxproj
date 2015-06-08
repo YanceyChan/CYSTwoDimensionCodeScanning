@@ -14,6 +14,7 @@
 		C16DF21C1B1FF6E7002DA9C5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C16DF21B1B1FF6E7002DA9C5 /* Images.xcassets */; };
 		C16DF21F1B1FF6E7002DA9C5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C16DF21D1B1FF6E7002DA9C5 /* LaunchScreen.xib */; };
 		C16DF22B1B1FF6E7002DA9C5 /* CYSTwoDimensionCodeScanningTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C16DF22A1B1FF6E7002DA9C5 /* CYSTwoDimensionCodeScanningTests.m */; };
+		C1945CC91B256A5800BC4E3D /* CYSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1945CC81B256A5800BC4E3D /* CYSWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		C16DF2241B1FF6E7002DA9C5 /* CYSTwoDimensionCodeScanningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CYSTwoDimensionCodeScanningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16DF2291B1FF6E7002DA9C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C16DF22A1B1FF6E7002DA9C5 /* CYSTwoDimensionCodeScanningTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYSTwoDimensionCodeScanningTests.m; sourceTree = "<group>"; };
+		C1945CC71B256A5800BC4E3D /* CYSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYSWebViewController.h; sourceTree = "<group>"; };
+		C1945CC81B256A5800BC4E3D /* CYSWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYSWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				C16DF2131B1FF6E7002DA9C5 /* AppDelegate.m */,
 				C16DF2151B1FF6E7002DA9C5 /* ViewController.h */,
 				C16DF2161B1FF6E7002DA9C5 /* ViewController.m */,
+				C1945CC71B256A5800BC4E3D /* CYSWebViewController.h */,
+				C1945CC81B256A5800BC4E3D /* CYSWebViewController.m */,
 				C16DF2181B1FF6E7002DA9C5 /* Main.storyboard */,
 				C16DF21B1B1FF6E7002DA9C5 /* Images.xcassets */,
 				C16DF21D1B1FF6E7002DA9C5 /* LaunchScreen.xib */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C16DF2171B1FF6E7002DA9C5 /* ViewController.m in Sources */,
+				C1945CC91B256A5800BC4E3D /* CYSWebViewController.m in Sources */,
 				C16DF2141B1FF6E7002DA9C5 /* AppDelegate.m in Sources */,
 				C16DF2111B1FF6E7002DA9C5 /* main.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "CYSWebViewController.h"
 #import <AVFoundation/AVFoundation.h>
 @interface ViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIView *myVIew;
@@ -19,6 +20,10 @@
 
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+@property (strong, nonatomic) NSTimer *timer;
+
+//webViewController
+@property (strong, nonatomic) CYSWebViewController *webView;
 
 @end
 
@@ -27,10 +32,16 @@
     [super viewDidLoad];
     //TODO: make something intersting
     //FIXME: LALAL
-    _captureSession = nil;
-    _isReading = NO;
+    self.captureSession = nil;
+    self.isReading = NO;
     
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.myLabel.text = @"";
+    [self.myButton setTitle:@"Star!" forState:UIControlStateNormal];
 }
 
 - (IBAction)didTapMyButton:(id)sender {
@@ -86,7 +97,8 @@
     self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
     
     //设置预览图层填充方式
-    [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [self.videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    
     
     //设置图层frame
     [self.videoPreviewLayer setFrame:self.myVIew.layer.bounds];
@@ -95,23 +107,26 @@
     [self.myVIew.layer addSublayer:self.videoPreviewLayer];
     
     //设置扫描范围
-    captureMetadtaOutput.rectOfInterest = CGRectMake(0.2f, 0.2f, 0.8f, 0.8f);
+    //相对于session的videoPreviewLayer的frame 的比例  以横屏的左上角为原点，宽高都是根据横屏比例。
+    //videoPreviewLayer 的 VideoGravity 的类型， Aspect 和AspectFill ，上面说的原点取值是以Aspect为准
+    captureMetadtaOutput.rectOfInterest = CGRectMake(0.3, 0.2f, 0.4f, 0.6f);
     
     //扫描框
-    _boxView = [[UIView alloc] initWithFrame:CGRectMake(self.myVIew.bounds.size.width * 0.2f, self.myVIew.bounds.size.height * 0.2f, self.myVIew.bounds.size.width - self.myVIew.bounds.size.width * 0.4f, self.myVIew.bounds.size.height - self.myVIew.bounds.size.height * 0.4f)];
-    _boxView.layer.borderColor = [UIColor greenColor].CGColor;
-    _boxView.layer.borderWidth = 1.0f;
-    [_myVIew addSubview:_boxView];
+    self.boxView = [[UIView alloc] initWithFrame:CGRectMake(self.myVIew.bounds.size.width * 0.2f, self.myVIew.bounds.size.height * 0.2f, self.myVIew.bounds.size.width - self.myVIew.bounds.size.width * 0.4f, self.myVIew.bounds.size.height - self.myVIew.bounds.size.height * 0.4f)];
+    
+    self.boxView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.boxView.layer.borderWidth = 1.0f;
+    [self.myVIew addSubview:self.boxView];
     
     //扫描线
-    _scanLayer = [[CALayer alloc]init];
-    _scanLayer.frame = CGRectMake(0, 0, _boxView.bounds.size.width, 1);
-    self.scanLayer.backgroundColor = [UIColor redColor].CGColor;
+    self.scanLayer = [[CALayer alloc]init];
+    self.scanLayer.frame = CGRectMake(0, 0, self.boxView.bounds.size.width, 1);
+    self.scanLayer.backgroundColor = [UIColor brownColor].CGColor;
     [self.boxView.layer addSublayer:self.scanLayer];
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(moveScanLayer:) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(moveScanLayer:) userInfo:nil repeats:YES];
     
-    [timer fire];
+    [self.timer fire];
     
     //开始扫描
     [self.captureSession startRunning];
@@ -125,18 +140,25 @@
     [self.scanLayer removeFromSuperlayer];
     [self.videoPreviewLayer removeFromSuperlayer];
     [self.boxView removeFromSuperview];
+    [self.timer invalidate];
+    
+    if ([self.myLabel.text  hasPrefix:@"https://"]) {
+        [self performSegueWithIdentifier:@"pushToWebViewSegue" sender:nil];
+    }
+    
+
 }
 
 
 - (void)moveScanLayer:(NSTimer *)timer{
     CGRect frame = self.scanLayer.frame;
-    if (self.boxView.frame.size.width < self.scanLayer.frame.origin.y) {
+    if (self.boxView.frame.size.height < self.scanLayer.frame.origin.y) {
         frame.origin.y = 0;
         self.scanLayer.frame = frame;
     }
     else{
         frame.origin.y += 5;
-        [UIView animateWithDuration:0.1 animations:^{
+        [UIView animateWithDuration:0.05 animations:^{
             self.scanLayer.frame = frame;
         }];
     }
@@ -154,16 +176,28 @@
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         //判断回传的数据类型
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
-            [self.myLabel performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
+            [self.myLabel performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:YES];
             
             [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
             self.isReading = NO;
+
         }
     }
 }
 
+//ios6.0 后 是否支持转向
 - (BOOL)shouldAutorotate{
     return NO;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"pushToWebViewSegue"]) {
+        CYSWebViewController *webViewC = segue.destinationViewController;
+        webViewC.myUrl = self.myLabel.text;
+    }
+
+}
+
 
 @end

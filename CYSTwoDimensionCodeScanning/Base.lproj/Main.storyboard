@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bB2-Di-WB6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="u48-dd-nrw">
+            <objects>
+                <navigationController id="bB2-Di-WB6" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pIY-uI-bid">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="r0L-xp-4Wn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M5m-LR-zG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-640" y="250"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -17,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-fY-qSh">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-fY-qSh">
                                 <rect key="frame" x="0.0" y="28" width="600" height="400"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scanning for QR Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGb-sR-etA">
@@ -38,7 +54,7 @@
                                     <constraint firstAttribute="height" constant="400" id="hqM-px-OoT"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx2-1A-v3C">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx2-1A-v3C">
                                 <rect key="frame" x="214" y="444" width="173" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="173" id="hyK-W2-RrN"/>
@@ -61,14 +77,51 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ecP-fY-qSh" secondAttribute="trailing" constant="-16" id="GtZ-Sx-VIX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="yy1-R9-NmM"/>
                     <connections>
                         <outlet property="myButton" destination="zx2-1A-v3C" id="tCv-e8-F2V"/>
                         <outlet property="myLabel" destination="eGb-sR-etA" id="0cl-hK-OVw"/>
                         <outlet property="myVIew" destination="ecP-fY-qSh" id="o1j-cQ-lea"/>
+                        <segue destination="qQo-eD-xgG" kind="push" identifier="pushToWebViewSegue" id="A7r-Ji-Gm2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="283" y="282"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="wIB-bw-RXZ">
+            <objects>
+                <viewController id="qQo-eD-xgG" customClass="CYSWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QRE-Kh-9Dp"/>
+                        <viewControllerLayoutGuide type="bottom" id="x35-xG-cPf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sli-WP-DNF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wI-1w-TjB">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5wI-1w-TjB" secondAttribute="trailing" constant="-16" id="2HU-P0-O3A"/>
+                            <constraint firstItem="x35-xG-cPf" firstAttribute="top" secondItem="5wI-1w-TjB" secondAttribute="bottom" id="BfL-YP-AGF"/>
+                            <constraint firstItem="5wI-1w-TjB" firstAttribute="leading" secondItem="sli-WP-DNF" secondAttribute="leadingMargin" constant="-16" id="jXp-wD-8sk"/>
+                            <constraint firstItem="5wI-1w-TjB" firstAttribute="top" secondItem="sli-WP-DNF" secondAttribute="topMargin" id="pzz-mk-PH4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tDB-yp-J3V"/>
+                    <connections>
+                        <outlet property="webView" destination="5wI-1w-TjB" id="utq-YB-eA6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3y0-V6-LhT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1119" y="303"/>
         </scene>
     </scenes>
 </document>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[CYSWebViewController viewDidLoad]:CYSWebViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.myUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController prepareForSegue:sender:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.myLabel.text">
+            </PersistentString>
+            <PersistentString
+               value = "webViewC.myUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
