@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>1149A68A-B3AF-47BE-95DF-75DA1F854152</string>
 	<key>IDESourceControlProjectName</key>
-	<string>CYSTwoDimensionCodeScanning</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E147CA7F0379BAF090ED419F34ECE8637FA31156</key>
 		<string>https://github.com/YanceyChan/CYSTwoDimensionCodeScanning.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CYSTwoDimensionCodeScanning.xcodeproj</string>
+	<string>CYSTwoDimensionCodeScanning.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E147CA7F0379BAF090ED419F34ECE8637FA31156</key>

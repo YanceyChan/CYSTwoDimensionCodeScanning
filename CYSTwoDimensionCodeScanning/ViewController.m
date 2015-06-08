@@ -30,8 +30,6 @@
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //TODO: make something intersting
-    //FIXME: LALAL
     self.captureSession = nil;
     self.isReading = NO;
     
@@ -59,7 +57,7 @@
     self.isReading = !self.isReading;
 }
 
-
+//TODO: 增加背景模糊效果
 - (BOOL)starReading{
     NSError *error;
     
@@ -84,6 +82,11 @@
     
     //将媒体输出流添加到会话中
     [self.captureSession addOutput:captureMetadtaOutput];
+    
+    
+    //设置视频输入每帧质量
+    self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
+    
     
     //创建串行队列
     dispatch_queue_t dispatchQueue;
@@ -112,6 +115,7 @@
     captureMetadtaOutput.rectOfInterest = CGRectMake(0.3, 0.2f, 0.4f, 0.6f);
     
     //扫描框
+    //TODO: 找个好看的扫描边框
     self.boxView = [[UIView alloc] initWithFrame:CGRectMake(self.myVIew.bounds.size.width * 0.2f, self.myVIew.bounds.size.height * 0.2f, self.myVIew.bounds.size.width - self.myVIew.bounds.size.width * 0.4f, self.myVIew.bounds.size.height - self.myVIew.bounds.size.height * 0.4f)];
     
     self.boxView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -119,6 +123,7 @@
     [self.myVIew addSubview:self.boxView];
     
     //扫描线
+    //TODO: 找个好看的扫描线
     self.scanLayer = [[CALayer alloc]init];
     self.scanLayer.frame = CGRectMake(0, 0, self.boxView.bounds.size.width, 1);
     self.scanLayer.backgroundColor = [UIColor brownColor].CGColor;
@@ -142,7 +147,7 @@
     [self.boxView removeFromSuperview];
     [self.timer invalidate];
     
-    if ([self.myLabel.text  hasPrefix:@"https://"]) {
+    if ([self.myLabel.text  hasPrefix:@"https://"] || [self.myLabel.text  hasPrefix:@"http://"] ) {
         [self performSegueWithIdentifier:@"pushToWebViewSegue" sender:nil];
     }
     
