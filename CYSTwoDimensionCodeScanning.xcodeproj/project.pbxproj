@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -168,6 +168,7 @@
 		C16DF2031B1FF6E7002DA9C5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CYS;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = exmaple;
 				TargetAttributes = {
@@ -181,7 +182,7 @@
 				};
 			};
 			buildConfigurationList = C16DF2061B1FF6E7002DA9C5 /* Build configuration list for PBXProject "CYSTwoDimensionCodeScanning" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (

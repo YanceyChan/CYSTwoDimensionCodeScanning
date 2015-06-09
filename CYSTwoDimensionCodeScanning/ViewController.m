@@ -10,20 +10,20 @@
 #import "CYSWebViewController.h"
 #import <AVFoundation/AVFoundation.h>
 @interface ViewController ()<AVCaptureMetadataOutputObjectsDelegate>
-@property (weak, nonatomic) IBOutlet UIView *myVIew;
-@property (weak, nonatomic) IBOutlet UILabel *myLabel;
-@property (weak, nonatomic) IBOutlet UIButton *myButton;
+@property (weak, nonatomic  ) IBOutlet UIView                     *myVIew;
+@property (weak, nonatomic  ) IBOutlet UILabel                    *myLabel;
+@property (weak, nonatomic  ) IBOutlet UIButton                   *myButton;
 
-@property (strong, nonatomic) UIView *boxView;
-@property (assign, nonatomic) BOOL isReading;
-@property (strong, nonatomic) CALayer *scanLayer;
+@property (strong, nonatomic) UIView                     *boxView;
+@property (assign, nonatomic) BOOL                       isReading;
+@property (strong, nonatomic) CALayer                    *scanLayer;
 
-@property (strong, nonatomic) AVCaptureSession *captureSession;
+@property (strong, nonatomic) AVCaptureSession           *captureSession;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-@property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) NSTimer                    *timer;
 
 //webViewController
-@property (strong, nonatomic) CYSWebViewController *webView;
+@property (strong, nonatomic) CYSWebViewController       *webView;
 
 @end
 
@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.captureSession = nil;
-    self.isReading = NO;
+    self.isReading      = NO;
     
     // Do any additional setup after loading the view, typically from a nib.
 }
