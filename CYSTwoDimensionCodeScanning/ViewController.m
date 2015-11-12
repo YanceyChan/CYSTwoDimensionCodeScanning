@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "CYSWebViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
 @interface ViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic  ) IBOutlet UIView                     *myVIew;
 @property (weak, nonatomic  ) IBOutlet UILabel                    *myLabel;
@@ -83,10 +84,8 @@
     //将媒体输出流添加到会话中
     [self.captureSession addOutput:captureMetadtaOutput];
     
-    
     //设置视频输入每帧质量
     self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
-    
     
     //创建串行队列
     dispatch_queue_t dispatchQueue;
@@ -118,15 +117,18 @@
     //TODO: 找个好看的扫描边框
     self.boxView = [[UIView alloc] initWithFrame:CGRectMake(self.myVIew.bounds.size.width * 0.2f, self.myVIew.bounds.size.height * 0.2f, self.myVIew.bounds.size.width - self.myVIew.bounds.size.width * 0.4f, self.myVIew.bounds.size.height - self.myVIew.bounds.size.height * 0.4f)];
     
-    self.boxView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.boxView.layer.borderWidth = 1.0f;
+    self.boxView.layer.borderColor = [UIColor colorWithRed:0.4317 green:0.9208 blue:0.2185 alpha:1.0].CGColor;
+    self.boxView.layer.borderWidth = 2.0f;
+    self.boxView.alpha = 1.f;
     [self.myVIew addSubview:self.boxView];
     
     //扫描线
     //TODO: 找个好看的扫描线
     self.scanLayer = [[CALayer alloc]init];
-    self.scanLayer.frame = CGRectMake(0, 0, self.boxView.bounds.size.width, 1);
-    self.scanLayer.backgroundColor = [UIColor brownColor].CGColor;
+    self.scanLayer.frame = CGRectMake(0, 0, self.boxView.bounds.size.width, 2);
+    self.scanLayer.borderColor = [UIColor colorWithRed:0.9254 green:0.9098 blue:0.1794 alpha:1.0].CGColor;
+//    self.scanLayer.backgroundColor = [UIColor colorWithRed:0.9254 green:0.9098 blue:0.1794 alpha:1.0].CGColor;
+    self.scanLayer.borderWidth = 2.0f;
     [self.boxView.layer addSublayer:self.scanLayer];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(moveScanLayer:) userInfo:nil repeats:YES];
@@ -150,6 +152,7 @@
     if ([self.myLabel.text  hasPrefix:@"https://"] || [self.myLabel.text  hasPrefix:@"http://"] ) {
         [self performSegueWithIdentifier:@"pushToWebViewSegue" sender:nil];
     }
+    NSLog(@"转码：%@", self.myLabel.text);
     
 
 }
@@ -162,8 +165,8 @@
         self.scanLayer.frame = frame;
     }
     else{
-        frame.origin.y += 5;
-        [UIView animateWithDuration:0.05 animations:^{
+        frame.origin.y += 8;
+        [UIView animateWithDuration:0.01 animations:^{
             self.scanLayer.frame = frame;
         }];
     }
@@ -195,6 +198,7 @@
     return NO;
 }
 
+//跳转
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if ([segue.identifier isEqualToString:@"pushToWebViewSegue"]) {
